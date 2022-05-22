@@ -63,3 +63,29 @@
     ]
   }
 }
+
+// yet another way??????
+    "search": [
+      {
+        "searchPage": ["request", {
+          "url": "~corsProxy~ + https://animekisa.cc/search?name= + ~searchPhrase~",
+          "method": "get"
+        }]
+      },
+      {
+        "title": ["query", {
+          "load": "~searchPage.data~"
+          "selector": "html title > title",
+          "attribute": "text"
+        }]
+      },
+      {
+        "sumn": [ "query", {
+          "load": "~searchPage.data~"
+          "selector": "h1.boom > a",
+          "attribute": "href"
+        }]
+      }
+    ]
+  }
+}
