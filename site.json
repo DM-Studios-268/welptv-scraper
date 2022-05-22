@@ -1,0 +1,27 @@
+{
+  "site": "animekisa.cc",
+  "server": {
+    "name": "adora",
+    "version": "0.0.1"
+  },
+  "environment": {
+    "corsProxy": "https://api.allorigins.win/get?url="
+  },
+  "actions": {
+    "search": [
+      {
+        "request": {
+          "url": "~corsProxy~ + https://animekisa.cc/search?name= + ~searchPhrase~",
+          "method": "get"
+        }
+      },
+      {
+        "query": {
+          "selector": "h1.boom > a",
+          "attribute": "href"
+        }
+      }
+    ],
+    "getRecents": []
+  }
+}
