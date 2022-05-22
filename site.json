@@ -17,11 +17,49 @@
       },
       {
         "query": {
+          "selector": "html title",
+          "attribute": "text"
+        }
+      },
+      {
+        "query": {
           "selector": "h1.boom > a",
           "attribute": "href"
         }
-      }
+      },
     ],
-    "getRecents": []
+    
+    
+// another way??
+    "search": [
+      {
+        "function": "request",
+        "params": {
+          "url": "~corsProxy~ + https://animekisa.cc/search?name= + ~searchPhrase~",
+          "method": "get"
+        },
+        "returnValueAs": "searchPage"
+      },
+      [
+        {
+          "function": "query",
+          "params": {
+            "load": "~searchPage.data~"
+            "selector": "html title > title",
+            "attribute": "text"
+          },
+          "returnValueAs": "title"
+        },
+        {
+          "function": "query",
+          "params": {
+            "load": "~searchPage.data~"
+            "selector": "h1.boom > a",
+            "attribute": "href"
+          },
+          "returnValueAs": "sumn"
+        },
+      ]
+    ]
   }
 }
