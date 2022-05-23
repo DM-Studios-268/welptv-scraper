@@ -23,11 +23,11 @@
         }]
       },
       {
-        "items": ["each", {
+        "items": ["forEach", "itemName", "~list~", {
           "steps": [
             {
               "sumn": ["query", {
-                "load": "~searchPage.data~",
+                "load": "~itemName.data~",
                 "selector": "h1.boom > a",
                 "attribute": "href"
               }]
