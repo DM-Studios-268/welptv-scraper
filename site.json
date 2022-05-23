@@ -17,14 +17,14 @@
       },
       {
         "title": ["query", {
-          "load": "~searchPage.data~"
+          "load": "~searchPage.data~",
           "selector": "html title > title",
           "attribute": "text"
         }]
       },
       {
-        "sumn": [ "query", {
-          "load": "~searchPage.data~"
+        "sumn": ["query", {
+          "load": "~searchPage.data~",
           "selector": "h1.boom > a",
           "attribute": "href"
         }]
