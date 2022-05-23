@@ -23,6 +23,18 @@
         }]
       },
       {
+        "items": ["each", {
+          "steps": [
+            {
+              "sumn": ["query", {
+                "load": "~searchPage.data~",
+                "selector": "h1.boom > a",
+                "attribute": "href"
+              }]
+            }
+        }]
+      },
+      {
         "sumn": ["query", {
           "load": "~searchPage.data~",
           "selector": "h1.boom > a",
