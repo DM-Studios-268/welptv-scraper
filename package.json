@@ -1,0 +1,8 @@
+{
+  "name": "welptv-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DM-Studios-268/welptv-scraper.git",
+  "author": "Cesar Diaz <cesar@mistify.co>",
+  "license": "MIT"
+}
