@@ -27,9 +27,6 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 12
-      # Runs a command to test the code
-      - name: Test the code
-        run: npm run test
       # Runs a command to build the code
       - name: Build the project
         run: npm run build
