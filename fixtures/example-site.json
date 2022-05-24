@@ -1,0 +1,38 @@
+{
+  "site": "animekisa.cc",
+  "server": {
+    "name": "adora",
+    "version": "0.0.1"
+  },
+  "env": {
+    "searchUrl": "https://animekisa.cc/search?name=",
+    "corsProxy": "https://api.allorigins.win/get?url="
+  },
+  "actions": {
+    "search": {
+      "searchPage": ["request", {
+        "url": "~corsProxy~~searchUrl~~searchPhrase~",
+        "method": "get"
+      }],
+      "title": ["query", {
+        "load": "~searchPage.data~",
+        "selector": "html title > title",
+        "attribute": "text"
+      }],
+      "items": ["forEach", "itemName", "~list~", {
+        "steps": {
+          "sumn": ["query", {
+            "load": "~itemName.data~",
+            "selector": "h1.boom > a",
+            "attribute": "href"
+          }]
+        }
+      }],
+      "sumn": ["query", {
+        "load": "~searchPage.data~",
+        "selector": "h1.boom > a",
+        "attribute": "href"
+      }]
+    }
+  }
+}

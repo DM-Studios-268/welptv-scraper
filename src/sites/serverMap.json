@@ -1,0 +1,8 @@
+{
+  "env": {
+
+  },
+  "servers": {
+    "mesha": "src/sites/mesha.json"
+  }
+}
