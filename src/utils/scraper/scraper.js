@@ -1,4 +1,4 @@
-const factory = ({ readFile, functions, log }) => (data) => {
+const factory = ({ readFile, functions, log }) => async (data) => {
   const getJsonFile = async (path) => {
     const config = (await readFile(path)).toString()
     const json = JSON.parse(config)
@@ -7,12 +7,12 @@ const factory = ({ readFile, functions, log }) => (data) => {
 
   const interpolateValues = (params, data) => {
     const interpolate = (string) => {
-      if(!string.includes('~')){
+      if (!string.includes('~')) {
         return string
       }
       const start = string.indexOf('~')
-      const end = string.indexOf('~', index+1)
-      const key = string.substring(start, end+1)
+      const end = string.indexOf('~', start + 1)
+      const key = string.substring(start, end + 1)
       const newString = string.replace(`~${key}~`, data[key])
 
       return interpolate(newString)
@@ -33,7 +33,8 @@ const factory = ({ readFile, functions, log }) => (data) => {
     ...data.params,
   }
 
-  const result = Object.entries(steps).reduce((prev, [key, value]) => {
+  const result = await Object.entries(steps).reduce(async (prevPromise, [key, value]) => {
+    const prev = await prevPromise
     const [funcName, params] = value
     const populatedParams = interpolateValues(params, prev)
     const stepResult = await functions[funcName](populatedParams, prev)
@@ -47,4 +48,4 @@ const factory = ({ readFile, functions, log }) => (data) => {
   return result
 }
 
-modules.exports = { factory }
+module.exports = { factory }

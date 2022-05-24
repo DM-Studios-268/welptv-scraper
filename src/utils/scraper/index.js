@@ -2,9 +2,9 @@ const { readFile } = require('fs/promises')
 const { factory } = require('./scraper')
 
 const functions = {
-  request: async (params) => {
+  request: async (params, data) => {
 
-  }
+  },
 }
 
 const scraper = factory({
@@ -14,4 +14,3 @@ const scraper = factory({
 })
 
 module.exports = { scraper }
-
