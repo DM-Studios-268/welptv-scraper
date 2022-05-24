@@ -11,6 +11,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  FIREBASE_ACCOUNT_CONFIG: ${{secrets.FIREBASE_ACCOUNT_CONFIG}}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -22,6 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      # Install version 12 of node
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
 
       # Runs a set of commands using the runners shell
       - name: Run test files
