@@ -1,0 +1,8 @@
+{
+  "server": "mesha",
+  "version": "0.0.1",
+  "action": "search",
+  "params": {
+    "searchKey": ""
+  }
+}
