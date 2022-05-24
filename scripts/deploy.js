@@ -1,8 +1,10 @@
-const firebaseAdmin = require('firebase-admin')
-const { v4: uuidv4 } = require('uuid')
 
 const { FIREBASE_ACCOUNT_CONFIG, DEPLOYMENT_BUCKET } = process.env
 console.log({ FIREBASE_ACCOUNT_CONFIG, DEPLOYMENT_BUCKET })
+
+const firebaseAdmin = require('firebase-admin')
+const { v4: uuidv4 } = require('uuid')
+
 const serviceAccount = JSON.parse(FIREBASE_ACCOUNT_CONFIG)
 
 const admin = firebaseAdmin.initializeApp({
