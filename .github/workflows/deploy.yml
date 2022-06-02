@@ -28,9 +28,12 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 12
-      # Runs a command to build the code
+      
+      - name: Build the project
+        run: npm install
+      
       - name: Build the project
         run: npm run build
-      # Runs a command to deploy the code the cloud
+      
       - name: Deploy the code
         run: npm run deploy
