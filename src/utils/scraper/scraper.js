@@ -22,9 +22,9 @@ const factory = ({ readFile, functions, log }) => async (data) => {
     return interpolate(string)
   }
 
-  const siteConfig = await getJsonFile('src/sites/serverMap.json')
+  const serverMap = await getJsonFile('src/sites/serverMap.json')
 
-  const serverPath = siteConfig.servers[data.server]
+  const serverPath = serverMap.servers[data.server]
   const { env: serverEnv, actions } = await getJsonFile(serverPath)
 
   const steps = actions[data.action]
