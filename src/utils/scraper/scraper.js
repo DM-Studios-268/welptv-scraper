@@ -1,10 +1,4 @@
-const factory = ({ readFile, functions, log }) => async (data) => {
-  const getJsonFile = async (path) => {
-    const config = (await readFile(path)).toString()
-    const json = JSON.parse(config)
-    return json
-  }
-
+const factory = ({ getServer, functions, log }) => async (data) => {
   const interpolateValues = (params, data) => {
     const interpolate = (string) => {
       if (!string.includes('~')) {
@@ -22,10 +16,9 @@ const factory = ({ readFile, functions, log }) => async (data) => {
     return interpolate(string)
   }
 
-  const siteConfig = await getJsonFile('src/sites/serverMap.json')
-
-  const serverPath = siteConfig.servers[data.server]
-  const { env: serverEnv, actions } = await getJsonFile(serverPath)
+  const { env: serverEnv, actions } = await getServer({
+    server: data.server,
+  })
 
   const steps = actions[data.action]
   const initialValue = {
@@ -33,14 +26,19 @@ const factory = ({ readFile, functions, log }) => async (data) => {
     ...data.params,
   }
 
+  // for each step in this [action]
   const result = await Object.entries(steps).reduce(async (prevPromise, [key, value]) => {
-    const prev = await prevPromise
+    const globalVaribales = await prevPromise // get global variables
+
     const [funcName, params] = value
-    const populatedParams = interpolateValues(params, prev)
-    const stepResult = await functions[funcName](populatedParams, prev)
+    // place the global varibales into this step's parameters
+    const populatedParams = interpolateValues(params, globalVaribales)
+
+    // run the function, passing in the populated parameters and the global variables
+    const stepResult = await functions[funcName](populatedParams, globalVaribales)
 
     return {
-      ...prev,
+      ...globalVaribales,
       [key]: stepResult,
     }
   }, initialValue)
