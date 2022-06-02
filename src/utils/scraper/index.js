@@ -1,10 +1,10 @@
-const { readFile } = require('fs/promises')
 const { factory } = require('./scraper')
 const { resolvers } = require('../resolvers')
+const { getServer } = require('../getServer')
 
 const scraper = factory({
   resolvers,
-  readFile,
+  getServer,
   log: console.log,
 })
 
