@@ -3,6 +3,6 @@
 
   },
   "servers": {
-    "mesha": "src/sites/mesha.json"
+    "mesha": "src/sites/boom.json"
   }
 }
