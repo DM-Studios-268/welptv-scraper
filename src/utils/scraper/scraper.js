@@ -1,21 +1,9 @@
-const factory = ({ getServer, functions, log }) => async (data) => {
-  const interpolateValues = (params, data) => {
-    const interpolate = (string) => {
-      if (!string.includes('~')) {
-        return string
-      }
-      const start = string.indexOf('~')
-      const end = string.indexOf('~', start + 1)
-      const key = string.substring(start, end + 1)
-      const newString = string.replace(`~${key}~`, data[key])
-
-      return interpolate(newString)
-    }
-
-    const string = JSON.stringify(params)
-    return interpolate(string)
-  }
-
+const factory = ({
+  interpolateValues,
+  getServer,
+  functions,
+  log,
+}) => async (data) => {
   const { env: serverEnv, actions } = await getServer({
     server: data.server,
   })
